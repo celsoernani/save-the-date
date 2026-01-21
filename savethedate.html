@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Save the Date • Lara & Celso</title>
+    <meta
+      name="description"
+      content="Save the Date • 03 OUT 2026 • Fortaleza - CE • Confirme presença"
+    />
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
+
+      :root {
+        --sand: #d8b37e;
+        --brown: #795342;
+        --sage: #78827a;
+        --olive: #504d39;
+        --rust: #c55027;
+
+        --white: rgba(255, 255, 255, 0.98);
+        --white-soft: rgba(255, 255, 255, 0.78);
+        --glass: rgba(255, 255, 255, 0.1);
+        --glass2: rgba(255, 255, 255, 0.14);
+        --shadow: 0 22px 70px rgba(0, 0, 0, 0.18);
+
+        --radius: 26px;
+        --radius-sm: 16px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        padding: 22px;
+        position: relative;
+
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Arial,
+          "Helvetica Neue",
+          Helvetica;
+        color: var(--white);
+        background: #111;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: url("assets/fundo.jpg") center / cover no-repeat;
+        filter: blur(06px) saturate(10.02em);
+        transform: scale(1.05);
+        z-index: -2;
+      }
+
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: rgba(245, 239, 230, 0.9);
+        z-index: -1;
+      }
+
+      .shell {
+        width: min(980px, 100%);
+        display: flex;
+        gap: 16px;
+        align-items: stretch;
+      }
+
+      .card {
+        border-radius: 0;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        isolation: isolate;
+      }
+
+      .hero {
+        flex: 0 0 40%;
+        max-width: 40%;
+        border-radius: 1rem;
+      }
+
+      .hero img.bg {
+        position: static;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .heroInner {
+        height: 100%;
+        padding: 26px 26px 22px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 18px;
+        text-align: center;
+      }
+
+      .topBrand {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        align-items: center;
+        margin-top: 4px;
+      }
+
+      .monogram {
+        width: 72px;
+        height: 34px;
+        object-fit: contain;
+        opacity: 0.95;
+        filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.18));
+      }
+
+      /* fallback caso não use imagem do monograma */
+      .monoText {
+        font-family:
+          "Brush Script MT", "Snell Roundhand", "Apple Chancery", cursive;
+        font-size: 34px;
+        color: rgba(121, 83, 66, 0.95);
+        letter-spacing: 0.5px;
+        display: none;
+        text-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+      }
+
+      .label {
+        font-size: 18px;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        color: var(--white-soft);
+      }
+
+      .dateBig {
+        margin: 0;
+        line-height: 1.02;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+        text-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+      }
+      .dateBig .n {
+        font-size: clamp(62px, 6vw, 92px);
+        display: block;
+        margin-top: 10px;
+        margin-bottom: 6px;
+      }
+      .dateBig .m {
+        font-size: clamp(42px, 4.2vw, 66px);
+        font-weight: 400;
+        letter-spacing: 0.35em;
+        display: block;
+      }
+      .dateBig .y {
+        font-size: clamp(56px, 5.3vw, 84px);
+        display: block;
+        margin-top: 6px;
+        opacity: 0.98;
+      }
+
+      .bottomNames {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+        margin-bottom: 6px;
+      }
+
+      .names {
+        font-family:
+          "Brush Script MT", "Snell Roundhand", "Apple Chancery", cursive;
+        font-size: clamp(40px, 4vw, 54px);
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        color: var(--white);
+        text-shadow: 0 18px 60px rgba(0, 0, 0, 0.25);
+      }
+
+      .place {
+        font-size: 12px;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* ======= SIDE (RSVP) ======= */
+      .side {
+        font-family:
+          "Montserrat",
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Arial,
+          "Helvetica Neue",
+          Helvetica;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.8),
+          rgba(255, 255, 255, 0.6)
+        );
+        color: #2a1c16;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        border: 0;
+      }
+
+      .sideInner {
+        padding: 22px;
+        display: grid;
+        gap: 14px;
+        align-content: start;
+      }
+
+      .h {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: rgba(58, 42, 35, 0.7);
+        text-align: center;
+      }
+
+      .p {
+        margin: 0;
+        color: rgba(58, 42, 35, 0.78);
+        line-height: 1.55;
+        font-size: 14px;
+      }
+
+      .count {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-top: 6px;
+      }
+
+      .t {
+        background: rgba(255, 255, 255, 0.6);
+        border: 1px solid rgba(121, 83, 66, 0.12);
+        border-radius: 16px;
+        padding: 12px 10px;
+        text-align: center;
+      }
+      .t strong {
+        display: block;
+        font-size: 20px;
+        letter-spacing: 0.02em;
+        color: rgba(58, 42, 35, 0.92);
+      }
+      .t span {
+        display: block;
+        margin-top: 2px;
+        font-size: 11px;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(58, 42, 35, 0.55);
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 6px;
+      }
+
+      .btn {
+        appearance: none;
+        border: 0;
+        cursor: pointer;
+        padding: 12px 14px;
+        border-radius: 14px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        font-size: 12px;
+        transition:
+          transform 0.06s ease,
+          filter 0.18s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        user-select: none;
+      }
+      .btn:active {
+        transform: translateY(1px);
+      }
+
+      /* botão “discreto chique”, puxando do marrom/sand */
+      .btnPrimary {
+        background: linear-gradient(135deg, var(--sand), #efd7b0);
+        color: rgba(58, 42, 35, 0.95);
+        box-shadow: 0 12px 30px rgba(216, 179, 126, 0.3);
+      }
+      .btnGhost {
+        background: rgba(255, 255, 255, 0.55);
+        border: 1px solid rgba(121, 83, 66, 0.18);
+        color: rgba(121, 83, 66, 0.9);
+      }
+
+      .qr {
+        margin-top: 4px;
+        padding: 14px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.55);
+        border: 1px dashed rgba(121, 83, 66, 0.26);
+        display: grid;
+        gap: 10px;
+        justify-items: center;
+      }
+      .qr img {
+        width: 170px;
+        max-width: 100%;
+        height: auto;
+        border-radius: 14px;
+        background: #fff;
+        padding: 10px;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .mini {
+        font-size: 12px;
+        color: rgba(58, 42, 35, 0.62);
+        letter-spacing: 0.02em;
+        text-align: center;
+        margin: 0;
+        line-height: 1.45;
+      }
+
+      @media (max-width: 920px) {
+        body {
+          padding: 0;
+        }
+        .shell {
+          flex-direction: column;
+          width: 100%;
+          gap: 0px;
+        }
+        .hero {
+          min-height: 100svh;
+          max-width: 100%;
+          border-radius: 0;
+        }
+        .hero img.bg {
+          width: 100%;
+          height: 100vh;
+          object-fit: cover;
+        }
+        .side {
+          border-radius: 0;
+        }
+        .actions {
+          flex-direction: column;
+        }
+        .actions .btn {
+          width: 100%;
+        }
+        .count {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="shell">
+      <section class="card hero" aria-label="Save the Date">
+        <img class="bg" src="assets/hero.svg" alt="Convite do casal" />
+      </section>
+
+      <!-- LADO RSVP -->
+      <aside class="side" aria-label="Confirmação de presença">
+        <div class="sideInner">
+          <p class="h">Confirmação</p>
+          <p class="p">
+            Para ajudar no nosso planejamento, confirma sua presença no link
+            abaixo. Se preferir, use o QR Code.
+          </p>
+
+          <div>
+            <p class="h" style="margin-bottom: 8px">Contagem regressiva</p>
+            <div class="count" role="timer" aria-live="polite">
+              <div class="t"><strong id="dd">—</strong><span>Dias</span></div>
+              <div class="t"><strong id="hh">—</strong><span>Horas</span></div>
+              <div class="t"><strong id="mm">—</strong><span>Min</span></div>
+              <div class="t"><strong id="ss">—</strong><span>Seg</span></div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <!-- COLE AQUI O LINK REAL DO RSVP -->
+            <a
+              class="btn btnPrimary"
+              id="rsvpBtn"
+              href="https://tally.so/r/J9OdYJ"
+              target="_blank"
+              rel="noopener"
+            >
+              Confirmar presença
+            </a>
+
+            <button class="btn btnGhost" type="button" id="copyBtn">
+              Copiar link
+            </button>
+          </div>
+
+          <div class="qr">
+            <img
+              src="assets/frame.png"
+              alt="QR Code para confirmação"
+              onerror="
+                this.style.display = 'none';
+                document.getElementById('qrText').style.display = 'block';
+              "
+            />
+          </div>
+
+          <p class="mini">
+            Mais detalhes (local, horário, dress code) serão enviados depois.
+          </p>
+        </div>
+      </aside>
+    </main>
+
+    <script>
+      const target = new Date(2026, 9, 3, 0, 0, 0);
+
+      const rsvpBtn = document.getElementById("rsvpBtn");
+      const RSVP_URL = rsvpBtn.href;
+
+      const $dd = document.getElementById("dd");
+      const $hh = document.getElementById("hh");
+      const $mm = document.getElementById("mm");
+      const $ss = document.getElementById("ss");
+
+      function pad(n) {
+        return String(n).padStart(2, "0");
+      }
+
+      function tick() {
+        const now = new Date();
+        let diff = target.getTime() - now.getTime();
+        if (diff < 0) diff = 0;
+
+        const totalSeconds = Math.floor(diff / 1000);
+        const days = Math.floor(totalSeconds / (24 * 3600));
+        const hours = Math.floor((totalSeconds % (24 * 3600)) / 3600);
+        const mins = Math.floor((totalSeconds % 3600) / 60);
+        const secs = totalSeconds % 60;
+
+        $dd.textContent = days;
+        $hh.textContent = pad(hours);
+        $mm.textContent = pad(mins);
+        $ss.textContent = pad(secs);
+      }
+
+      tick();
+      setInterval(tick, 1000);
+
+      document.getElementById("copyBtn").addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(RSVP_URL);
+          const btn = document.getElementById("copyBtn");
+          const old = btn.textContent;
+          btn.textContent = "Copiado";
+          setTimeout(() => (btn.textContent = old), 1400);
+        } catch (e) {
+          alert("Copie o link: " + RSVP_URL);
+        }
+      });
+    </script>
+  </body>
+</html>
