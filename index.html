@@ -87,6 +87,7 @@
       }
 
       .hero {
+        position: relative;
         flex: 0 0 40%;
         max-width: 40%;
         border-radius: 1rem;
@@ -346,6 +347,42 @@
         line-height: 1.45;
       }
 
+      .scrollHint {
+        position: absolute;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.55);
+        border: 1px solid rgba(121, 83, 66, 0.2);
+        color: rgba(58, 42, 35, 0.9);
+        font-size: 22px;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+        animation: bounce 1.8s ease-in-out infinite;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+      }
+
+      .scrollHint.isHidden {
+        opacity: 0;
+        transform: translateX(-50%) translateY(6px);
+        pointer-events: none;
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translateX(-50%) translateY(0);
+        }
+        50% {
+          transform: translateX(-50%) translateY(8px);
+        }
+      }
+
       @media (max-width: 920px) {
         body {
           padding: 0;
@@ -364,6 +401,9 @@
           width: 100%;
           height: 100vh;
           object-fit: cover;
+        }
+        .scrollHint {
+          display: inline-flex;
         }
         .side {
           border-radius: 0;
@@ -385,6 +425,7 @@
     <main class="shell">
       <section class="card hero" aria-label="Save the Date">
         <img class="bg" src="assets/hero.svg" alt="Convite do casal" />
+        <div class="scrollHint" aria-hidden="true">↓</div>
       </section>
 
       <!-- LADO RSVP -->
@@ -446,6 +487,7 @@
 
       const rsvpBtn = document.getElementById("rsvpBtn");
       const RSVP_URL = rsvpBtn.href;
+      const scrollHint = document.querySelector(".scrollHint");
 
       const $dd = document.getElementById("dd");
       const $hh = document.getElementById("hh");
@@ -475,6 +517,29 @@
 
       tick();
       setInterval(tick, 1000);
+
+      function updateScrollHint() {
+        if (!scrollHint) return;
+        const scrollY = window.scrollY;
+        const doc = document.documentElement;
+        const maxScroll = doc.scrollHeight - window.innerHeight;
+        const halfway = maxScroll * 0.5;
+        const atBottom = scrollY >= maxScroll - 20;
+        const show = scrollY < 20 || scrollY >= halfway;
+        scrollHint.classList.toggle("isHidden", !show || atBottom);
+      }
+
+      if (scrollHint) {
+        scrollHint.addEventListener("click", () => {
+          window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: "smooth",
+          });
+        });
+      }
+
+      updateScrollHint();
+      window.addEventListener("scroll", updateScrollHint, { passive: true });
 
       document.getElementById("copyBtn").addEventListener("click", async () => {
         try {
